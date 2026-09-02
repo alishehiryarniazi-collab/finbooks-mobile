@@ -16,6 +16,7 @@ type Dest = keyof Omit<MoreStackParamList, "MoreHome">;
 const ITEMS: { to: Dest; icon: string; title: string }[] = [
   { to: "Settings", icon: "⚙️", title: "Company Settings" },
   { to: "Team", icon: "👥", title: "Team" },
+  { to: "Notifications", icon: "🔔", title: "Notifications" },
   { to: "TaxRates", icon: "🧾", title: "Tax Rates" },
   { to: "CostCenters", icon: "🏷️", title: "Cost Centers" },
   { to: "Projects", icon: "📁", title: "Projects" },

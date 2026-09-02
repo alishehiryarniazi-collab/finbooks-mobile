@@ -22,7 +22,11 @@ export function apiError(err: unknown): string {
     if (!err.response) {
       return "Can't reach the server. Make sure the backend is running and your phone is on the same Wi-Fi as your PC.";
     }
-    const data = err.response.data as { error?: unknown; message?: unknown } | undefined;
+    const data = err.response.data as { error?: unknown; message?: unknown; details?: unknown } | undefined;
+    // Field-level validation (zod): tell the user EXACTLY which field is wrong and why,
+    // instead of a generic "Validation failed".
+    const fieldMsg = formatValidation(data?.details);
+    if (fieldMsg) return fieldMsg;
     const candidate = data?.error ?? data?.message ?? err.message;
     if (typeof candidate === "string") return candidate;
     if (candidate != null) return JSON.stringify(candidate);
@@ -30,6 +34,29 @@ export function apiError(err: unknown): string {
   }
   if (err instanceof Error) return err.message;
   return "Something went wrong.";
+}
+
+// "organizationName" -> "Organization name" so error lines read naturally.
+function prettyField(field: string): string {
+  return field
+    .replace(/([A-Z])/g, " $1")
+    .replace(/^./, (c) => c.toUpperCase())
+    .trim();
+}
+
+// Turns a zod flatten() payload ({ fieldErrors, formErrors }) into a readable
+// "Field: reason" list, one issue per line.
+function formatValidation(details: unknown): string | null {
+  if (!details || typeof details !== "object") return null;
+  const d = details as { fieldErrors?: Record<string, string[]>; formErrors?: string[] };
+  const parts: string[] = [];
+  if (d.fieldErrors) {
+    for (const [field, msgs] of Object.entries(d.fieldErrors)) {
+      if (Array.isArray(msgs) && msgs.length > 0) parts.push(`${prettyField(field)}: ${msgs.join(", ")}`);
+    }
+  }
+  if (Array.isArray(d.formErrors)) parts.push(...d.formErrors);
+  return parts.length > 0 ? parts.join("\n") : null;
 }
 
 // Machine-readable code for confirmable warnings (e.g. "NEGATIVE_CASH", "DUPLICATE_REF"),

@@ -1,6 +1,8 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
+import { Platform } from "react-native";
 import { api, apiError } from "../lib/api";
 import { setActiveCurrency } from "../lib/format";
+import { registerForPushNotificationsAsync } from "../lib/notifications";
 import type { User } from "../lib/types";
 import { clearToken, getToken, setToken } from "../storage/token";
 
@@ -51,6 +53,22 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       }
     })();
   }, []);
+
+  // Once we have a logged-in user (and whenever they switch company), register this device's
+  // push token with the backend so it can send notifications. Fails quietly in Expo Go or
+  // before the app is EAS-linked (no token yet) — remote push needs a development build.
+  useEffect(() => {
+    if (!user) return;
+    (async () => {
+      const token = await registerForPushNotificationsAsync();
+      if (!token) return;
+      try {
+        await api.post("/notifications/token", { token, platform: Platform.OS });
+      } catch {
+        /* backend endpoint not ready / offline — ignore; we'll re-register next launch */
+      }
+    })();
+  }, [user?.id, user?.orgId]);
 
   async function login(email: string, password: string) {
     try {

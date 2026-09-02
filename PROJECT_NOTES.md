@@ -84,9 +84,25 @@ All web features are now in the mobile app:
 
 Native modules added (all bundled in Expo Go, SDK 54): expo-print, expo-sharing, expo-file-system.
 
+## Push notifications (Firebase / Expo) — CODE DONE, needs a dev build to fire
+- Client: `expo-notifications` + `expo-device`; `src/lib/notifications.ts` (permissions, Expo push
+  token, local reminders). AuthContext registers the device token to the backend after login.
+  `More → Notifications`: send-test button + daily bills-due local reminder toggle.
+- Backend (accounting-system): `PushToken` model + migration; `POST/DELETE /notifications/token`,
+  `POST /notifications/test`; `services/push.ts` (sendExpoPush + notifyOrg); payments trigger a
+  push to the team. All endpoints smoke-tested (200/201).
+- Delivery uses Expo push service (FCM under the hood). app.json: android package `com.finbooks.app`
+  + expo-notifications plugin.
+- **Ali's remaining steps (deployment):** create Firebase project → add Android app (com.finbooks.app)
+  → download `google-services.json` into finbooks-mobile/ → add `"googleServicesFile": "./google-services.json"`
+  under android in app.json → `eas init` → `eas build --profile development --platform android` →
+  `eas credentials` (upload FCM key). Push (local + remote) only fires in a dev/Play-Store build, NOT Expo Go.
+
 STILL NOT DONE (deferred by Ali):
 - i18n / RTL (Urdu / Arabic) — app is English only for now.
 
-Known limitation: editing a draft invoice/bill requires re-picking each line's account
-(the detail endpoint returns the account name, not its id) — creating works fully.
+Draft edit: editing a draft invoice/bill now prefills each line's account — the form
+matches the line's account code (from the detail endpoint) against the loaded accounts
+list to recover the id (client-side only; backend untouched).
+
 Later: EAS Build for a real installable APK / store release (paid — Ali decides).

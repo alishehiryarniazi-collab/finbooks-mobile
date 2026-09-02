@@ -23,6 +23,7 @@ interface LineDraft {
   unitPrice: string;
   taxRatePercent: string;
   expenseAccountId: string | null;
+  code?: string | null; // account code from a loaded draft, resolved to an id once accounts load
 }
 const emptyLine = (): LineDraft => ({ description: "", quantity: "1", unitPrice: "", taxRatePercent: "0", expenseAccountId: null });
 
@@ -68,7 +69,8 @@ export function BillFormScreen({ route, navigation }: Props) {
             quantity: String(Number(l.quantity)),
             unitPrice: String(Number(l.unitPrice)),
             taxRatePercent: String(Number(l.taxRatePercent)),
-            expenseAccountId: null, // re-pick on edit (detail exposes account name, not id)
+            expenseAccountId: null,
+            code: l.expenseAccount?.code ?? null, // resolved to an id by the effect below
           })),
         );
       } catch (err) {
@@ -78,6 +80,19 @@ export function BillFormScreen({ route, navigation }: Props) {
       }
     })();
   }, [editId]);
+
+  // Prefill each edited line's account by matching its code against the loaded accounts
+  // (the bill detail gives the account's code/name, not its id). Only fills empty picks.
+  useEffect(() => {
+    if (!acctData) return;
+    setLines((prev) =>
+      prev.map((l) => {
+        if (l.expenseAccountId || !l.code) return l;
+        const match = acctData.accounts.find((a) => a.code === l.code);
+        return match ? { ...l, expenseAccountId: match.id } : l;
+      }),
+    );
+  }, [acctData]);
 
   function updateLine(i: number, patch: Partial<LineDraft>) {
     setLines((prev) => prev.map((l, idx) => (idx === i ? { ...l, ...patch } : l)));

@@ -17,6 +17,7 @@ import { TeamScreen } from "../screens/more/TeamScreen";
 import { TaxRatesScreen } from "../screens/more/TaxRatesScreen";
 import { CostCentersScreen } from "../screens/more/CostCentersScreen";
 import { ProjectsScreen } from "../screens/more/ProjectsScreen";
+import { NotificationsScreen } from "../screens/more/NotificationsScreen";
 import { BooksHomeScreen } from "../screens/books/BooksHomeScreen";
 import { AccountsScreen } from "../screens/accounts/AccountsScreen";
 import { GeneralLedgerScreen } from "../screens/accounts/GeneralLedgerScreen";
@@ -158,6 +159,7 @@ function MoreStack() {
       <More.Screen name="TaxRates" component={TaxRatesScreen} options={{ title: "Tax Rates" }} />
       <More.Screen name="CostCenters" component={CostCentersScreen} options={{ title: "Cost Centers" }} />
       <More.Screen name="Projects" component={ProjectsScreen} options={{ title: "Projects" }} />
+      <More.Screen name="Notifications" component={NotificationsScreen} options={{ title: "Notifications" }} />
     </More.Navigator>
   );
 }

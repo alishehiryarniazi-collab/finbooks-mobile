@@ -32,6 +32,7 @@ export type MoreStackParamList = {
   TaxRates: undefined;
   CostCenters: undefined;
   Projects: undefined;
+  Notifications: undefined;
 };
 
 export type PurchasesStackParamList = {
