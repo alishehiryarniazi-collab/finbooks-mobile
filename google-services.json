@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "437158205880",
+    "project_id": "finbooks-dadd6",
+    "storage_bucket": "finbooks-dadd6.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:437158205880:android:f35e8d98f62b696719574d",
+        "android_client_info": {
+          "package_name": "com.finbooks.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAY7owaTqmZ_fpP39LEN5HPGHJKczz0CwY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

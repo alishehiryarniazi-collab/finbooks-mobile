@@ -5,18 +5,18 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
+    "userInterfaceStyle": "dark",
+    "backgroundColor": "#05060a",
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.finbooks.app"
     },
     "android": {
       "package": "com.finbooks.app",
+      "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
-        "backgroundColor": "#E6F4FE",
-        "foregroundImage": "./assets/android-icon-foreground.png",
-        "backgroundImage": "./assets/android-icon-background.png",
-        "monochromeImage": "./assets/android-icon-monochrome.png"
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#05060a"
       },
       "predictiveBackGestureEnabled": false
     },
@@ -30,7 +30,22 @@
         {
           "color": "#5ff0d4"
         }
+      ],
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/splash-icon.png",
+          "imageWidth": 220,
+          "resizeMode": "contain",
+          "backgroundColor": "#05060a"
+        }
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "8d470570-bfe3-41e5-8b6d-61be2be97663"
+      }
+    },
+    "owner": "sharyarkhan"
   }
 }

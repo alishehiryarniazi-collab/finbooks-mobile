@@ -11,7 +11,10 @@ import Constants from "expo-constants";
 //   1. On your PC run:  ipconfig   (look for "IPv4 Address", e.g. 192.168.1.20)
 //   2. Put it below, including the port and /api, e.g.
 //        const MANUAL_API_URL = "http://192.168.1.20:4001/api";
-const MANUAL_API_URL = "";
+// For a standalone/preview APK there is no Metro host to auto-detect, so we point at the
+// backend explicitly. TESTING: your PC's LAN IP (phone must be on the same Wi-Fi).
+// PRODUCTION: change this to your hosted backend URL, e.g. "https://api.finbooks.app/api".
+const MANUAL_API_URL = "http://192.168.0.128:4001/api";
 
 // Backend port (see accounting-system/backend/.env → PORT=4001).
 const BACKEND_PORT = 4001;
