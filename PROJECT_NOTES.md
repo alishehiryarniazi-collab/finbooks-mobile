@@ -105,4 +105,22 @@ Draft edit: editing a draft invoice/bill now prefills each line's account — th
 matches the line's account code (from the detail endpoint) against the loaded accounts
 list to recover the id (client-side only; backend untouched).
 
-Later: EAS Build for a real installable APK / store release (paid — Ali decides).
+## Deployment / launch status (2026-09-03)
+DONE:
+- Firebase project `finbooks-dadd6` created; Android app `com.finbooks.app`; `google-services.json`
+  in place; FCM V1 service-account key uploaded to EAS. (Service-account key is gitignored.)
+- EAS linked (owner `sharyarkhan`, projectId in app.json); `eas.json` with dev/preview/production.
+- App icon + splash (Aurora) and a white notification icon.
+- `usesCleartextTraffic: true` (expo-build-properties) so built APKs can reach an http:// backend
+  during testing — set to false once the backend is https.
+- Backend URL is runtime-configurable (Login → Server settings) and defaults to the PC LAN IP.
+- Privacy policy: `legal/privacy-policy.html` (fill in the contact email; host it publicly).
+- Backend deploy guide + Dockerfile: `../accounting-system/backend/DEPLOY.md` + `Dockerfile`.
+- Preview APK built on EAS and installed on Ali's phone.
+
+REMAINING (human steps — see the ordered checklist Claude gave):
+1. Test push on the installed build (login → token registers → send test / backend push).
+2. Host the backend publicly (MySQL + API over https) — the app can't use a LAN IP in production.
+3. Point the app at the https backend, disable cleartext, build a production `.aab`.
+4. Play Console ($25) + listing + screenshots + hosted privacy-policy URL → submit.
+- Optional: Urdu/Arabic i18n.
