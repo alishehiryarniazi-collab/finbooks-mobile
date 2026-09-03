@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 import { Platform } from "react-native";
-import { api, apiError } from "../lib/api";
+import { api, apiError, loadStoredApiUrl } from "../lib/api";
 import { setActiveCurrency } from "../lib/format";
 import { registerForPushNotificationsAsync } from "../lib/notifications";
 import type { User } from "../lib/types";
@@ -39,6 +39,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   // On launch: if a token is stored, restore the session by fetching the current user.
   useEffect(() => {
     (async () => {
+      await loadStoredApiUrl(); // use the saved backend URL (if any) before any request
       if (!(await getToken())) {
         setLoading(false);
         return;

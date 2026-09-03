@@ -1,10 +1,24 @@
 import axios from "axios";
 import { API_BASE_URL } from "../config/env";
 import { getToken } from "../storage/token";
+import { getStoredApiUrl } from "../storage/apiUrl";
 
 // One axios instance for the whole app, pointed at the FinBooks backend.
 // (Native apps aren't subject to browser CORS, so we call the API directly.)
 export const api = axios.create({ baseURL: API_BASE_URL, timeout: 15000 });
+
+// The backend URL can be changed at runtime (Login → Server settings) and is loaded
+// from device storage at startup, so a changed LAN IP never needs an app rebuild.
+export function getApiBaseUrl(): string {
+  return api.defaults.baseURL ?? API_BASE_URL;
+}
+export function setApiBaseUrl(url: string): void {
+  api.defaults.baseURL = url.trim();
+}
+export async function loadStoredApiUrl(): Promise<void> {
+  const stored = await getStoredApiUrl();
+  if (stored) api.defaults.baseURL = stored;
+}
 
 // Attach the JWT to every request. Reading the token is async on mobile
 // (secure store), and axios supports async request interceptors.
