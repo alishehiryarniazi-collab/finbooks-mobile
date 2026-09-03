@@ -49,7 +49,7 @@ FinBooks contains no ads and no third-party tracking.
 
 ## Contact details (required)
 - Email: alishehiryarniazi@gmail.com
-- Privacy policy URL: [hosted privacy-policy.html URL — see legal/privacy-policy.html]
+- Privacy policy URL: https://alishehiryarniazi-collab.github.io/finbooks-mobile/legal/privacy-policy.html
 
 ## Content rating
 - Answer the questionnaire honestly: it's a finance/business tool, no violence,
