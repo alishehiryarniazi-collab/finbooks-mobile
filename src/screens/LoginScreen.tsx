@@ -15,8 +15,8 @@ import { colors, radius, spacing } from "../theme/colors";
 export function LoginScreen() {
   const { login } = useAuth();
   const navigation = useNavigation<any>();
-  const [email, setEmail] = useState("demo@finbooks.app");
-  const [password, setPassword] = useState("demo1234");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
 
@@ -59,8 +59,9 @@ export function LoginScreen() {
           keyboardType="email-address"
           autoCapitalize="none"
           autoCorrect={false}
+          placeholder="you@company.com"
         />
-        <PasswordField label="Password" value={password} onChangeText={setPassword} />
+        <PasswordField label="Password" value={password} onChangeText={setPassword} placeholder="Your password" />
         {error ? <Text style={styles.error}>{error}</Text> : null}
         <Button title={busy ? "Signing in…" : "Sign in"} onPress={onSubmit} loading={busy} />
       </Card>
@@ -79,7 +80,6 @@ export function LoginScreen() {
       >
         <Text style={styles.serverLink}>⚙️ Server settings</Text>
       </Pressable>
-      <Text style={styles.hint}>Demo: demo@finbooks.app / demo1234</Text>
 
       <Modal visible={serverOpen} transparent animationType="fade" onRequestClose={() => setServerOpen(false)}>
         <View style={styles.backdrop}>
