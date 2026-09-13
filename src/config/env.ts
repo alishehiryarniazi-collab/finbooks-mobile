@@ -12,9 +12,10 @@ import Constants from "expo-constants";
 //   2. Put it below, including the port and /api, e.g.
 //        const MANUAL_API_URL = "http://192.168.1.20:4001/api";
 // For a standalone/preview APK there is no Metro host to auto-detect, so we point at the
-// backend explicitly. TESTING: your PC's LAN IP (phone must be on the same Wi-Fi).
-// PRODUCTION: change this to your hosted backend URL, e.g. "https://api.finbooks.app/api".
-const MANUAL_API_URL = "http://192.168.100.201:4001/api";
+// backend explicitly. This is the default; users can override it at runtime from
+// Login → Server settings (stored in secure-store).
+// PRODUCTION: our live AWS backend over HTTPS (Nginx TLS -> Express :4001).
+const MANUAL_API_URL = "https://api.usefinbooks.app/api";
 
 // Backend port (see accounting-system/backend/.env → PORT=4001).
 const BACKEND_PORT = 4001;
