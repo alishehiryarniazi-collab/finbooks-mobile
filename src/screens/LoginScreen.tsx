@@ -4,6 +4,7 @@ import { useNavigation } from "@react-navigation/native";
 import { Screen } from "../components/ui/Screen";
 import { Card } from "../components/ui/Card";
 import { Field } from "../components/ui/Field";
+import { PasswordField } from "../components/ui/PasswordField";
 import { Button } from "../components/ui/Button";
 import { useAuth } from "../context/AuthContext";
 import { getApiBaseUrl, setApiBaseUrl } from "../lib/api";
@@ -59,7 +60,7 @@ export function LoginScreen() {
           autoCapitalize="none"
           autoCorrect={false}
         />
-        <Field label="Password" value={password} onChangeText={setPassword} secureTextEntry />
+        <PasswordField label="Password" value={password} onChangeText={setPassword} />
         {error ? <Text style={styles.error}>{error}</Text> : null}
         <Button title={busy ? "Signing in…" : "Sign in"} onPress={onSubmit} loading={busy} />
       </Card>

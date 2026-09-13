@@ -4,6 +4,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { Card } from "../../components/ui/Card";
 import { Button } from "../../components/ui/Button";
 import { Field } from "../../components/ui/Field";
+import { PasswordField } from "../../components/ui/PasswordField";
 import { SelectField } from "../../components/ui/SelectField";
 import { Spinner } from "../../components/ui/Spinner";
 import { ErrorNote } from "../../components/ui/ErrorNote";
@@ -124,7 +125,7 @@ export function TeamScreen() {
           <>
             <Field label="Name" value={name} onChangeText={setName} />
             <Field label="Email" value={email} onChangeText={setEmail} keyboardType="email-address" autoCapitalize="none" />
-            <Field label="Password (6+ chars)" value={password} onChangeText={setPassword} secureTextEntry />
+            <PasswordField label="Password (6+ chars)" value={password} onChangeText={setPassword} />
             <SelectField label="Role" value={role} options={ROLE_OPTIONS} onChange={(v) => setRole(v as Role)} />
           </>
         )}

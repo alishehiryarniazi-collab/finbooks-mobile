@@ -4,6 +4,7 @@ import { useNavigation } from "@react-navigation/native";
 import { Screen } from "../components/ui/Screen";
 import { Card } from "../components/ui/Card";
 import { Field } from "../components/ui/Field";
+import { PasswordField } from "../components/ui/PasswordField";
 import { Button } from "../components/ui/Button";
 import { useAuth } from "../context/AuthContext";
 import { colors, spacing } from "../theme/colors";
@@ -43,7 +44,7 @@ export function RegisterScreen() {
         <Field label="Company name" value={organizationName} onChangeText={setOrg} />
         <Field label="Your name" value={name} onChangeText={setName} />
         <Field label="Email" value={email} onChangeText={setEmail} keyboardType="email-address" autoCapitalize="none" autoCorrect={false} />
-        <Field label="Password (6+ chars)" value={password} onChangeText={setPassword} secureTextEntry />
+        <PasswordField label="Password (6+ chars)" value={password} onChangeText={setPassword} />
         {error ? <Text style={styles.error}>{error}</Text> : null}
         <Button title={busy ? "Creating…" : "Create company"} onPress={onSubmit} loading={busy} />
       </Card>

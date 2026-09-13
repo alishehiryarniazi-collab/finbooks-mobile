@@ -46,3 +46,4 @@ _DELETE_ME/
 # Firebase service-account key (SECRET — never commit)
 *firebase-adminsdk*.json
 fcm-key.json
+build/
