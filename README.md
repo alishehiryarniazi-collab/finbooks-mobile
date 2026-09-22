@@ -28,6 +28,18 @@ ledger, and financial reports — with role-based access, PDF/CSV export, and pu
 
 Roles are enforced everywhere: Admin, Accountant (read/write), Viewer (read-only).
 
+## Screenshots
+
+<table>
+  <tr>
+    <td align="center" width="20%"><b>Dashboard</b><br/><img src="docs/screenshots/01-dashboard.jpg" width="160" alt="Dashboard — cash, receivables, payables and income vs expense"/></td>
+    <td align="center" width="20%"><b>Books</b><br/><img src="docs/screenshots/02-books.jpg" width="160" alt="Books — chart of accounts, vouchers and journal"/></td>
+    <td align="center" width="20%"><b>Chart of Accounts</b><br/><img src="docs/screenshots/03-chart-of-accounts.jpg" width="160" alt="Chart of accounts with balances"/></td>
+    <td align="center" width="20%"><b>Reports</b><br/><img src="docs/screenshots/04-reports.jpg" width="160" alt="Reports — P&L, balance sheet, aging, tax"/></td>
+    <td align="center" width="20%"><b>More</b><br/><img src="docs/screenshots/05-more.jpg" width="160" alt="Settings, team, multi-company switch"/></td>
+  </tr>
+</table>
+
 ## Running it (development)
 1. Start the backend (see `../accounting-system/backend`) and note your PC's LAN IP.
 2. Install deps and start Metro:
